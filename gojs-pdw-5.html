@@ -310,21 +310,29 @@ async function pdw_do_file(file) {
           outputs: []
         };
         m.addNodeData(node);
+
+        // Create a link to the last place we remembered. If the port
+        // is not known, we know we must still add one to the node.
+
         if (!isEmpty(last)) {
-          if (last.port.length == 0) {
-            var po = addPort(last.node, false);
-          }
-          else var po = last.port;
+          var po = (last.port == "") ? addPort(last.node, false) : last.port;
           var pi = addPort(node, true);
-          m.addLinkData({ from: last.node.key, fromPort: po, to: node.key, toPort: pi });
+          m.addLinkData({
+            from: last.node.key, fromPort: po,
+            to: node.key, toPort: pi });
         };
+
+        // Remember that we're the one to connect the next stage to.
+        // The port is not defined, so additional ports will be created
+        // to fit the needs.
+
         last = m.findNodeDataForKey(doc.id);
         last = { node: node, port: "" };
         break;
       case "scan_connect":
         var pid = ((doc.flag == 1) ? "i" : "o") + doc.streamnum.toString();
         if (doc.flag ==1) {           // Input connector
-          last = {
+          last = {                    // Just remember where to connect to
             node: m.findNodeDataForKey(doc.id),
             port: pid
           };
