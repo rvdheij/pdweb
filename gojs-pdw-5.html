@@ -152,7 +152,7 @@ function pdw_init() {
             $(go.Shape, "RoundedRectangle",
               { strokeWidth: 0.5,
                 stroke: "blue",
-                fill: "transparent"
+                fill: "#c1eff2"
               }
             ),
             $(go.Panel, "Horizontal", { alignment: new go.Spot(0,0,0,5) },
@@ -202,6 +202,8 @@ function pdw_init() {
 
 }
 
+
+
 async function pdw_do_file(file) {
   var text = document.getElementById("testfile").value;
   var lines = text.split('\n');
@@ -228,6 +230,104 @@ async function pdw_do_file(file) {
     return (Object.keys(obj).length == 0);
   }
 
+// do_cons_out - Create balloon if needed and insert the text
+
+  function do_cons_out(doc) {
+    var s = doc.id + "cons";
+    node = m.findNodeDataForKey(s);
+    if (node == null) {
+      m.addNodeData({ key: s, category: "cons" , cons: [] });
+      node = m.findNodeDataForKey(s);
+      m.addLinkData({ from: s, to: doc.id, category: "balloon" });
+    };
+    var cons = node.cons;
+
+    // TextBlock is trimming leading whitespace which messes up my
+    // nicely formatted display. A \u00ad (soft hyphen) at the start
+    // fools the trimming process.
+
+    var line = doc.txt.substring(0,72);     // Truncate output lines
+    cons.push('\u00ad' + line);                 // Avoid trimming
+    if (cons.length > 8) { cons.splice(0,1); }  // Keep last lines
+    node.cons = cons;
+    txt = cons.join('\n');                  // Make text string
+    m.setDataProperty(m.findNodeDataForKey(s), "text", txt);
+  }
+
+  function do_sub_start(doc) {
+    var sub = {                 // of most recently dispatched stage
+        key: doc.id,
+        isGroup: true,
+        alive: false,
+        name: doc.name,
+        inputs: [],
+        outputs: []
+      };
+    m.addNodeData(sub);
+
+    // Go through inputs and outputs to reroute all existing
+    // links to the stage that we replace.
+    // Need to smarten up the process to find the affected links
+    // other than through sequential scanning!
+
+    for (var i = 0; i < node.inputs.length; i++) {
+      var pi = addPort(sub, true);
+      var p1 = node.inputs[i];
+      for (var lnk in m.linkDataArray) {
+        var ld = m.linkDataArray[lnk];
+        if ((ld.to == node.key) & (ld.toPort == pi)) {
+          m.removeLinkData(ld);
+          ld.to = sub.key;
+          m.addLinkData(ld);
+        }
+      }
+    };
+    for (var i = 0; i < node.outputs.length; i++) {
+      var pi = addPort(sub, false);
+      var p1 = node.outputs[i];
+      for (var lnk in m.linkDataArray) {
+        var ld = m.linkDataArray[lnk];
+        if ((ld.from == node.key) & (ld.fromPort == pi)) {
+          m.removeLinkData(ld);
+          ld.from = sub.key;
+          m.addLinkData(ld);
+        }
+      }
+    };
+    m.removeNodeData(node);   // Finally remove stage from model
+    group = doc.id;           // Remember group to add stages to
+  };
+
+  function do_stage(doc) {
+    node = {
+      key: doc.id,
+      name: ((doc.label.length != 0) ? doc.label + ': ' : '') + doc.verb,
+      category: "stage",
+      group: group,
+      inputs: [],
+      outputs: []
+    };
+    m.addNodeData(node);
+
+    // Create a link to the last place we remembered. If the port
+    // is not known, we know we must still add one to the node.
+
+    if (!isEmpty(last)) {
+      var po = (last.port == "") ? addPort(last.node, false) : last.port;
+      var pi = addPort(node, true);
+      m.addLinkData({
+        from: last.node.key, fromPort: po,
+        to: node.key, toPort: pi });
+    };
+
+    // Remember that we're the one to connect the next stage to.
+    // The port is not defined, so additional ports will be created
+    // to fit the needs.
+
+    last = m.findNodeDataForKey(doc.id);
+    last = { node: node, port: "" };
+  }
+
   for (var nr = 0; nr < lines.length; nr++) {
     line = lines[nr].trim();
     if (line.length == 0) continue;
@@ -242,48 +342,8 @@ async function pdw_do_file(file) {
         break;
       case "vector_allocated":
         if (! isEmpty(node)) {        // Subroutine pipeline takes place
-          var sub = {                 // of most recently dispatched stage
-              key: doc.id,
-              isGroup: true,
-              alive: false,
-              name: doc.name,
-              inputs: [],
-              outputs: []
-            };
-          m.addNodeData(sub);
-
-          // Go through inputs and outputs to reroute all existing
-          // links to the stage that we replace.
-          // Need to smarten up the process to find the affected links
-          // other than through sequential scanning!
-
-          for (var i = 0; i < node.inputs.length; i++) {
-            var pi = addPort(sub, true);
-            var p1 = node.inputs[i];
-            for (var lnk in m.linkDataArray) {
-              var ld = m.linkDataArray[lnk];
-              if ((ld.to == node.key) & (ld.toPort == pi)) {
-                m.removeLinkData(ld);
-                ld.to = sub.key;
-                m.addLinkData(ld);
-              }
-            }
-          };
-          for (var i = 0; i < node.outputs.length; i++) {
-            var pi = addPort(sub, false);
-            var p1 = node.outputs[i];
-            for (var lnk in m.linkDataArray) {
-              var ld = m.linkDataArray[lnk];
-              if ((ld.from == node.key) & (ld.fromPort == pi)) {
-                m.removeLinkData(ld);
-                ld.from = sub.key;
-                m.addLinkData(ld);
-              }
-            }
-          };
-          m.removeNodeData(node);   // Finally remove stage from model
-          group = doc.id;           // Remember group to add stages to
-        };
+          do_sub_start(doc);
+        }
         break;
       case "scan_begin":
         last = {};
@@ -301,33 +361,7 @@ async function pdw_do_file(file) {
         last = { node: ref, port: pid };
         break;
       case "scan_stage":
-        node = {
-          key: doc.id,
-          name: ((doc.label.length != 0) ? doc.label + ': ' : '') + doc.verb,
-          category: "stage",
-          group: group,
-          inputs: [],
-          outputs: []
-        };
-        m.addNodeData(node);
-
-        // Create a link to the last place we remembered. If the port
-        // is not known, we know we must still add one to the node.
-
-        if (!isEmpty(last)) {
-          var po = (last.port == "") ? addPort(last.node, false) : last.port;
-          var pi = addPort(node, true);
-          m.addLinkData({
-            from: last.node.key, fromPort: po,
-            to: node.key, toPort: pi });
-        };
-
-        // Remember that we're the one to connect the next stage to.
-        // The port is not defined, so additional ports will be created
-        // to fit the needs.
-
-        last = m.findNodeDataForKey(doc.id);
-        last = { node: node, port: "" };
+        do_stage(doc);
         break;
       case "scan_connect":
         var pid = ((doc.flag == 1) ? "i" : "o") + doc.streamnum.toString();
@@ -365,25 +399,7 @@ async function pdw_do_file(file) {
         }
         break;
       case "cons_out":
-        var s = doc.id + "cons";
-        node = m.findNodeDataForKey(s);
-        if (node == null) {
-          m.addNodeData({ key: s, category: "cons" , cons: [] });
-          node = m.findNodeDataForKey(s);
-          m.addLinkData({ from: s, to: doc.id, category: "balloon" });
-        };
-        var cons = node.cons;
-
-        // TextBlock is trimming leading whitespace which messes up my
-        // nicely formatted display. A \u00ad (soft hyphen) at the start
-        // fools the trimming process.
-
-        var line = doc.txt.substring(0,72);     // Truncate output lines
-        cons.push('\u00ad' + line);                 // Avoid trimming
-        if (cons.length > 8) { cons.splice(0,1); }  // Keep last lines
-        node.cons = cons;
-        txt = cons.join('\n');                  // Make text string
-        m.setDataProperty(m.findNodeDataForKey(s), "text", txt);
+        do_cons_out(doc)
         break;
     };
   }
