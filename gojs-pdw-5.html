@@ -106,13 +106,12 @@ function pdw_init() {
     );
 
   var consTemplate =
-    $(go.Node,
-      { background: "black" },
+    $(go.Node, { background: "black" },
       $(go.TextBlock,
         { stroke: "lightgreen",
           margin: 3,
           font: "12px monospace",
-          spacingAbove: 2
+          spacingAbove: 2         // Undocumented line spacing
         },
         new go.Binding("text"))
     );
@@ -246,7 +245,7 @@ async function pdw_do_file(file) {
           var sub = {                 // of most recently dispatched stage
               key: doc.id,
               isGroup: true,
-              alive: true,
+              alive: false,
               name: doc.name,
               inputs: [],
               outputs: []
@@ -324,15 +323,16 @@ async function pdw_do_file(file) {
         break;
       case "scan_connect":
         var pid = ((doc.flag == 1) ? "i" : "o") + doc.streamnum.toString();
-        if (doc.flag ==1) {
+        if (doc.flag ==1) {           // Input connector
           last = {
             node: m.findNodeDataForKey(doc.id),
             port: pid
           };
         }
-        else {
+        else {                          // Output connector
           ld = {
-            from: last.node.key, fromPort: last.port,
+            from: last.node.key,
+            fromPort: last.port == "" ? addPort(last.node, false): last.port,
             to: doc.id, toPort: pid
           };
           m.addLinkData(ld);
@@ -367,18 +367,15 @@ async function pdw_do_file(file) {
         var cons = node.cons;
 
         // TextBlock is trimming leading whitespace which messes up my
-        // nicely formatted display. The nbsp \u00a0 should do the trick
-        // but somehow I can't get that to work. Prefixing with '>'
-        // so we retain the formatting.
+        // nicely formatted display. A \u00ad (soft hyphen) at the start
+        // fools the trimming process.
 
         var line = doc.txt.substring(0,72);     // Truncate output lines
-//        line = line.replace(' ', '\u00a0');   // First space to \u00a0
-        cons.push('> ' + line);                 // Avoid trimming
+        cons.push('\u00ad' + line);                 // Avoid trimming
         if (cons.length > 8) { cons.splice(0,1); }  // Keep last lines
         node.cons = cons;
         txt = cons.join('\n');                  // Make text string
-        nn = m.findNodeDataForKey(doc.id + "cons");
-        m.setDataProperty(nn, "text", txt);
+        m.setDataProperty(m.findNodeDataForKey(s), "text", txt);
         break;
     };
   }
