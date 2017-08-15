@@ -21,7 +21,7 @@ function pdw_init() {
         initialContentAlignment: go.Spot.Center,  // Put content in the center
         layout: $(go.LayeredDigraphLayout,
             { direction: 90, layerSpacing: 15 }),
-        "undoManager.isEnabled": false            // Support ^Z and ^Y
+        "undoManager.isEnabled": false            // No transactions
       }
     );
 
@@ -130,7 +130,7 @@ function pdw_init() {
             { direction: 90, layerSpacing: 15 }
           )
         },
-        new go.Binding("isSubGraphExpanded", "alive"),
+        new go.Binding("isSubGraphExpanded", "alive").makeTwoWay(),
       $(go.Panel, "Vertical", // { minSize: new go.Size(120, 30) },
         $(go.Panel, "Horizontal",
           new go.Binding("itemArray", "inputs"),
@@ -232,7 +232,6 @@ async function pdw_do_file(file) {
   for (var nr = 0; nr < lines.length; nr++) {
     line = lines[nr].trim();
     if (line.length == 0) continue;
-//    m.startTransaction('stage');
     var doc = JSON.parse(line);
 //    console.log(nr, doc);
 //    console.log('last:', last);
@@ -296,7 +295,9 @@ async function pdw_do_file(file) {
         if (!isEmpty(last)) {
           var po = addPort(last.node, false);
           var pi = addPort(ref, true);
-          m.addLinkData({ from: last.node.key, fromPort: po, to: ref.key, toPort: pi });
+          m.addLinkData({
+            from: last.node.key, fromPort: po,
+            to: ref.key, toPort: pi });
         }
         last = { node: ref, port: pid };
         break;
@@ -343,9 +344,16 @@ async function pdw_do_file(file) {
       case "dispatcher":
       case "end_stage":
         node = m.findNodeDataForKey(doc.id);
-        if (node != null) {
-          m.setDataProperty(node, "color", colors[doc.evt]);
-          await sleep(50);
+        var animate = true;
+        if (node != null) {             // Stage in subroutine
+          if (node.group != "") {
+            var grp = m.findNodeDataForKey(node.group);
+            animate = grp.alive;
+          }
+          if (animate) {
+            m.setDataProperty(node, "color", colors[doc.evt]);
+            await sleep(250);
+          }
         }
         break;
       case "cons_out":
@@ -357,19 +365,22 @@ async function pdw_do_file(file) {
           m.addLinkData({ from: s, to: doc.id, category: "balloon" });
         };
         var cons = node.cons;
-        var line = doc.txt.substring(0,72);
-        console.log(line);
-//        line = line.replace(/ /g, '*');
-        console.log(line);
-        cons.push('> ' + line);
-        if (cons.length > 8) { cons.splice(0,1); }
+
+        // TextBlock is trimming leading whitespace which messes up my
+        // nicely formatted display. The nbsp \u00a0 should do the trick
+        // but somehow I can't get that to work. Prefixing with '>'
+        // so we retain the formatting.
+
+        var line = doc.txt.substring(0,72);     // Truncate output lines
+//        line = line.replace(' ', '\u00a0');   // First space to \u00a0
+        cons.push('> ' + line);                 // Avoid trimming
+        if (cons.length > 8) { cons.splice(0,1); }  // Keep last lines
         node.cons = cons;
-        txt = cons.join('\n');
+        txt = cons.join('\n');                  // Make text string
         nn = m.findNodeDataForKey(doc.id + "cons");
         m.setDataProperty(nn, "text", txt);
         break;
     };
-//    m.commitTransaction('stage');
   }
 
 }
