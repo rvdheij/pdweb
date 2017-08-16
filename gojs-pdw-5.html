@@ -60,6 +60,7 @@ function pdw_init() {
   var stageTemplate =
     $(go.Node, "Vertical",
       { locationSpot: go.Spot.Center },
+      new go.Binding("visible"),
       $(go.Panel, "Horizontal",
           { height: 5 , itemArray: [] },
           new go.Binding("itemArray", "inputs"),
@@ -254,6 +255,14 @@ async function pdw_do_file(file) {
     m.setDataProperty(m.findNodeDataForKey(s), "text", txt);
   }
 
+
+  // ****    do_sub_start     ****
+  // Handle birth of a subroutine like a callpipe. We create a group
+  // node to take the place of the currently running stage (no other
+  // way to tell who it was). Go through inputs and outputs of the
+  // stage and define ports on the group, and connect the link (by
+  // removing the old one and adding the new one).
+
   function do_sub_start(doc) {
     var sub = {                 // of most recently dispatched stage
         key: doc.id,
@@ -294,7 +303,12 @@ async function pdw_do_file(file) {
         }
       }
     };
-    m.removeNodeData(node);   // Finally remove stage from model
+
+    // Remove the replaced node. This is maybe not the right way
+    // because we need to resurrect it when then subroutine ends.
+
+    m.setDataProperty(node, "visible", false);
+//    m.removeNodeData(node);   // Finally remove stage from model
     group = doc.id;           // Remember group to add stages to
   };
 
@@ -322,7 +336,7 @@ async function pdw_do_file(file) {
 
     // Remember that we're the one to connect the next stage to.
     // The port is not defined, so additional ports will be created
-    // to fit the needs.
+    // to fit our needs.
 
     last = m.findNodeDataForKey(doc.id);
     last = { node: node, port: "" };
