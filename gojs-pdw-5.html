@@ -213,6 +213,7 @@ async function pdw_do_file(file) {
   var node = {};  // Currently in control
   var group = "";
   var colors = [];
+  var consout = null;
   colors["start_stage"]  = "#084B8A";
   colors["resume_stage"] = "#FF0000";
   colors["dispatcher"]   = "#2ECCFA";
@@ -236,6 +237,14 @@ async function pdw_do_file(file) {
     return sym;
   }
 
+  function mkLink(ld) {
+    if (group != '') {
+      var grp = m.findNodeDataForKey(group);
+      grp.children.push({ typ: 'link', obj: ld })
+    }
+    m.addLinkData(ld)
+  }
+
   function isEmpty(obj) {
     return (Object.keys(obj).length == 0);
   }
@@ -243,14 +252,13 @@ async function pdw_do_file(file) {
 // do_cons_out - Create balloon if needed and insert the text
 
   function do_cons_out(doc) {
-    var s = doc.id + "cons";
-    node = m.findNodeDataForKey(s);
-    if (node == null) {
-      m.addNodeData({ key: s, category: "cons" , cons: [] });
-      node = m.findNodeDataForKey(s);
-      m.addLinkData({ from: s, to: doc.id, category: "balloon" });
+
+    if (consout == null) {
+      m.addNodeData({ key: "cons", category: "cons", cons: []});
+      consout = m.findNodeDataForKey("cons");
+//    mkLink({ from: s, to: doc.id, category: "balloon" });
     };
-    var cons = node.cons;
+    var cons = consout.cons;
 
     // TextBlock is trimming leading whitespace which messes up my
     // nicely formatted display. A \u00ad (soft hyphen) at the start
@@ -259,9 +267,9 @@ async function pdw_do_file(file) {
     var line = doc.txt.substring(0,72);     // Truncate output lines
     cons.push('\u00ad' + line);                 // Avoid trimming
     if (cons.length > 8) { cons.splice(0,1); }  // Keep last lines
-    node.cons = cons;
+    consout.cons = cons;
     txt = cons.join('\n');                  // Make text string
-    m.setDataProperty(m.findNodeDataForKey(s), "text", txt);
+    m.setDataProperty(consout, "text", txt);
   }
 
 
@@ -275,6 +283,7 @@ async function pdw_do_file(file) {
         isGroup: true,
         alive: false,
         name: doc.name,
+        children: [],         // Child nodes and links inside
         inputs: [],
         outputs: []
       };
@@ -339,19 +348,18 @@ async function pdw_do_file(file) {
       }
     }
     console.log("Remove subroutine", sub.key, sub.name);
-    m.removeNodeData(sub);
-    for (var i in m.nodeDataArray) {
-      var nn = m.nodeDataArray[i];
-      if (nn.group == sub.key) m.removeNodeData(nn);
+
+    for (var i in sub.children) {
+      var obj = sub.children[i];
+      switch (obj.typ) {
+        case 'link':
+          m.removeLinkData(obj.obj);
+          break;
+        case 'node':
+          m.removeNodeData(obj.obj);
+      }
     }
-
-
-
-    // for (var i in m.nodeDataArray) {
-    //   var nn = m.nodeDataArray[i];
-    //   if (nn.group == doc.id) m.removeNodeData(nn);
-    // }
-    // m.removeNodeData(sub);
+    m.removeNodeData(sub);
   }
 
   // ****   do_stage  ****
@@ -369,6 +377,10 @@ async function pdw_do_file(file) {
       outputs: []
     };
     m.addNodeData(node);
+    if (group != "") {
+      var grp = m.findNodeDataForKey(group);
+      grp.children.push({ typ: 'node', obj: node });
+    }
 
     // Create a link to the last place we remembered. If the port
     // is not known, we know we must still add one to the node.
@@ -376,9 +388,13 @@ async function pdw_do_file(file) {
     if (!isEmpty(last)) {
       var po = (last.port == "") ? addPort(last.node, false) : last.port;
       var pi = addPort(node, true);
-      m.addLinkData({
-        from: last.node.key, fromPort: po,
-        to: node.key, toPort: pi });
+      var ld = {
+        from: last.node.key,
+        fromPort: po,
+        to: node.key,
+        toPort: pi
+      }
+      mkLink(ld);
     };
 
     // Remember that we're the one to connect the next stage to.
@@ -414,7 +430,7 @@ async function pdw_do_file(file) {
         fromPort: last.port == "" ? addPort(last.node, false): last.port,
         to: doc.id, toPort: pid
       };
-      m.addLinkData(ld);
+      mkLink(ld);
       last = {};
     }
   }
@@ -446,7 +462,7 @@ async function pdw_do_file(file) {
         if (!isEmpty(last)) {
           var po = addPort(last.node, false);
           var pi = addPort(ref, true);
-          m.addLinkData({
+          mkLink({
             from: last.node.key, fromPort: po,
             to: ref.key, toPort: pi });
         }
@@ -457,6 +473,9 @@ async function pdw_do_file(file) {
         break;
       case "scan_connect":
         do_connect(doc);
+        break;
+      case "leave_scanner":
+        group = "";
         break;
       case "start_stage":
       case "resume_stage":
