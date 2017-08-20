@@ -2,20 +2,13 @@
 <html>
 <head>
   <!-- use go-debug.js when developing and go.js when deploying -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.7.18/go-debug.js"></script>
-  <script src="http://gojs.net/latest/extensions/BalloonLink.js"></script>
+  <script src="https://gojs.net/latest/release/go-debug.js"></script>
+  <script src="https://gojs.net/latest/extensions/BalloonLink.js"></script>
   <script id="code">
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve,ms));
-}
-
-var $ = go.GraphObject.make;
-var myDiagram;
-
 function pdw_init() {
-
-  myDiagram =
+  var $ = go.GraphObject.make;
+  var myDiagram =
     $(go.Diagram, "myDiagramDiv",
       {
         initialContentAlignment: go.Spot.Center,  // Put content in the center
@@ -57,27 +50,32 @@ function pdw_init() {
 // When those get messed up, links start from another port or from
 // a vague position between.
 
+  function portArray(tag, numfr, numto) {
+    return $(go.Panel, "Horizontal",
+        { height: 5 , itemArray: [] },
+        new go.Binding("itemArray", tag),
+        { itemTemplate:
+            $(go.Panel, "Auto",
+              $(go.Shape, "Rectangle",
+                  { toSpot: go.Spot.Top,
+                    fromSpot : go.Spot.Bottom,
+                    margin: new go.Margin(0,3),
+                    fromMaxLinks: numfr, toMaxLinks: numto,
+                    width: 8, height: 5,
+                    fill: "red"
+                  },
+                  new go.Binding("portId", "portId")
+                )
+              )
+        }
+    )
+  };
+
   var stageTemplate =
     $(go.Node, "Vertical",
       { locationSpot: go.Spot.Center },
       new go.Binding("visible"),
-      $(go.Panel, "Horizontal",
-          { height: 5 , itemArray: [] },
-          new go.Binding("itemArray", "inputs"),
-          { itemTemplate:
-              $(go.Panel, "Auto",
-                $(go.Shape, "Rectangle",
-                    { toSpot: go.Spot.Top,
-                      margin: new go.Margin(0,3),
-                      fromMaxLinks: 0, toMaxLinks: 1,
-                      width: 8, height: 5,
-                      fill: "red"
-                    },
-                    new go.Binding("portId", "portId")
-                  )
-                )
-          }
-      ),
+      portArray("inputs", 0, 1),
       $(go.Panel, "Vertical",
         { background: "#084B8A", width: 100, height: 35 },
         $(go.TextBlock, "Stage", {
@@ -88,22 +86,7 @@ function pdw_init() {
         ),
         new go.Binding("background", "color")
       ),
-      $(go.Panel, "Horizontal",
-          new go.Binding("itemArray", "outputs"),
-          { itemTemplate:
-              $(go.Panel, "Auto",
-                $(go.Shape, "Rectangle",
-                    { fromSpot: go.Spot.Bottom,
-                      margin: new go.Margin(0,3),
-                      fromMaxLinks: 1, toMaxLinks: 0,
-                      width: 8, height: 5,
-                      fill: "red"
-                    },
-                    new go.Binding("portId", "portId")
-                  )
-                )
-          }
-      ),
+      portArray("outputs", 1, 0)
     );
 
   var consTemplate =
@@ -122,72 +105,40 @@ function pdw_init() {
 // take both inbound and outbound links, and represent the connectors
 // of the subroutine.
 
+  function connArray(tag) {
+    return $(go.Panel, "Horizontal",
+      new go.Binding("itemArray", tag),
+      { itemTemplate:
+          $(go.Panel, "Auto",
+            $(go.Shape, "Rectangle",
+                { toSpot: go.Spot.Top,
+                  fromSpot: go.Spot.Bottom,
+                  margin: new go.Margin(0,3),
+                  fromMaxLinks: 1, toMaxLinks: 1,
+                  width: 8, height: 5,
+                  fill: "red"},
+                new go.Binding("portId", "portId")))})
+  }
+
   var groupTemplate =
     $(go.Group, "Vertical",
         { locationSpot: go.Spot.Center,
-//          isSubGraphExpanded: false,
           layout: $(go.LayeredDigraphLayout,
-            { direction: 90, layerSpacing: 15 }
-          )
-        },
+            { direction: 90, layerSpacing: 15 })},
         new go.Binding("isSubGraphExpanded", "alive").makeTwoWay(),
-//        new go.Binding("visible"),
       $(go.Panel, "Vertical", // { minSize: new go.Size(120, 30) },
-        $(go.Panel, "Horizontal",
-          new go.Binding("itemArray", "inputs"),
-          { itemTemplate:
-              $(go.Panel, "Auto",
-                $(go.Shape, "Rectangle",
-                    { toSpot: go.Spot.Top,
-                      fromSpot: go.Spot.Bottom,
-                      margin: new go.Margin(0,3),
-                      fromMaxLinks: 1, toMaxLinks: 1,
-                      width: 8, height: 5,
-                      fill: "red"
-                    },
-                    new go.Binding("portId", "portId")
-                  )
-                )
-            }
-          ),
+          portArray("inputs", 1, 1),
           $(go.Panel, "Auto",
             $(go.Shape, "RoundedRectangle",
-              { strokeWidth: 0.5,
-                stroke: "blue",
-                fill: "#c1eff2"
-              }
-            ),
+              { strokeWidth: 0.5, stroke: "blue", fill: "#c1eff2" }),
             $(go.Panel, "Horizontal", { alignment: new go.Spot(0,0,0,5) },
               $("SubGraphExpanderButton", {
                   margin: new go.Margin(0,3,5,0)}),
               $(go.TextBlock, "Sub",
-                  { stroke: "blue",
-                    font: "10px sans-serif"
-                  },
-                new go.Binding("text", "name")
-              ),
-            ),
-            $(go.Placeholder, { margin: 15, padding: 5 }),
-          ),
-          $(go.Panel, "Horizontal",
-              new go.Binding("itemArray", "outputs"),
-              { itemTemplate:
-                  $(go.Panel, "Auto",
-                    $(go.Shape, "Rectangle",
-                        { toSpot: go.Spot.Top,
-                          fromSpot: go.Spot.Bottom,
-                          margin: new go.Margin(0,3),
-                          fromMaxLinks: 1, toMaxLinks: 1,
-                          width: 8, height: 5,
-                          fill: "red"
-                        },
-                        new go.Binding("portId", "portId")
-                      )
-                    )
-              }
-          ),
-      )
-  );
+                  { stroke: "blue", font: "10px sans-serif" },
+                new go.Binding("text", "name"))),
+            $(go.Placeholder, { margin: 15, padding: 5 })),
+          portArray("outputs", 1, 1)));
 
   var tmpmap = new go.Map("string", go.Node);
   tmpmap.add("stage", stageTemplate);
@@ -201,24 +152,28 @@ function pdw_init() {
   lnkmap.add("balloon", balloonLinkTemplate);
   lnkmap.add("", pipeLinkTemplate);
   myDiagram.linkTemplateMap = lnkmap;
-
+  return myDiagram;
 }
 
-
-
-async function pdw_do_file(file) {
+async function pdw_do_events(myDiagram) {
   var text = document.getElementById("testfile").value;
   var lines = text.split('\n');
   var last = {};      // { node: <node>, port: <port> }
   var node = {};  // Currently in control
   var group = "";
-  var colors = [];
+  var state = [];
   var consout = null;
-  colors["start_stage"]  = "#084B8A";
-  colors["resume_stage"] = "#FF0000";
-  colors["dispatcher"]   = "#2ECCFA";
-  colors["end_stage"]    = "blue";
+  state["start_stage"]  = { color: "#084B8A", delay:   0 };
+  state["resume_stage"] = { color: "#FF0000", delay: 200 };
+  state["dispatcher"]   = { color: "#2ECCFA", delay:   0 };
+  state["end_stage"]    = { color: "blue",    delay: 500 };
   m = myDiagram.model;
+
+  var $ = go.GraphObject.make;
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve,ms));
+  }
 
   function addPort(node, inp, nr) {
     var ports = inp ? node.inputs : node.outputs;
@@ -271,7 +226,6 @@ async function pdw_do_file(file) {
     txt = cons.join('\n');                  // Make text string
     m.setDataProperty(consout, "text", txt);
   }
-
 
   // ****    do_sub_start     ****
   // Handle birth of a subroutine like a callpipe. We create a group
@@ -330,7 +284,6 @@ async function pdw_do_file(file) {
 
   function do_sub_end(doc) {
     var sub = m.findNodeDataForKey(doc.id);
-    console.log("Ended subroutine", sub.key, "parent", sub.parent);
     var node = m.findNodeDataForKey(sub.parent);
     m.setDataProperty(node, "visible", true);
 
@@ -347,7 +300,6 @@ async function pdw_do_file(file) {
         }
       }
     }
-    console.log("Remove subroutine", sub.key, sub.name);
 
     for (var i in sub.children) {
       var obj = sub.children[i];
@@ -368,9 +320,14 @@ async function pdw_do_file(file) {
   // subroutine pipeline.
 
   function do_stage(doc) {
+    var s = doc.verb;
+    var font = '';
+    if (s == '') {
+      s = '[' + doc.parm.split(' ')[0] + ']';
+    }
     node = {
       key: doc.id,
-      name: ((doc.label.length != 0) ? doc.label + ': ' : '') + doc.verb,
+      name: ((doc.label.length != 0) ? doc.label + ': ' : '') + s,
       category: "stage",
       group: group,
       inputs: [],
@@ -401,7 +358,6 @@ async function pdw_do_file(file) {
     // The port is not defined, so additional ports will be created
     // to fit our needs.
 
-    last = m.findNodeDataForKey(doc.id);
     last = { node: node, port: "" };
   }
 
@@ -434,7 +390,6 @@ async function pdw_do_file(file) {
       last = {};
     }
   }
-
 
   for (var nr = 0; nr < lines.length; nr++) {
     line = lines[nr].trim();
@@ -488,9 +443,10 @@ async function pdw_do_file(file) {
             var grp = m.findNodeDataForKey(node.group);
             animate = grp.alive;
           }
+          m.setDataProperty(node, "color", state[doc.evt].color);
           if (animate) {
-            m.setDataProperty(node, "color", colors[doc.evt]);
-            await sleep(250);
+            var delay = state[doc.evt].delay;
+            if (delay > 0) { await sleep(delay) };
           }
         }
         break;
@@ -510,8 +466,8 @@ async function pdw_do_file(file) {
 
 
 function pdw_run() {
-  pdw_init();
-  pdw_do_file('http://192.168.1.102:1123/doevent.txt')
+  var myDiagram = pdw_init();
+  pdw_do_events(myDiagram)
 
 }
 
