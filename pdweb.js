@@ -1,12 +1,5 @@
-<!DOCTYPE html>  <!-- HTML5 document type -->
-<html>
-<head>
-  <!-- use go-debug.js when developing and go.js when deploying -->
-  <script src="https://gojs.net/latest/release/go-debug.js"></script>
-  <script src="https://gojs.net/latest/extensions/BalloonLink.js"></script>
-  <script src="pdw.js"></script>
+// Pipedemo - Web Edition
 
-  <script id="code">
 
 var pdw = {
   count: 0,
@@ -16,6 +9,7 @@ var pdw = {
   myDiagram: null,        // Root for GoJS objects
   last: {},               // Other port to connect to
   group: "",
+  syntax: "",             // Current syntax exit for msgs
 
   enqueue(msg) {
     this.events.push(msg)
@@ -30,10 +24,10 @@ var pdw = {
     var $ = go.GraphObject.make;
 
     var state = [];
-    state["start_stage"]  = { color: "#084B8A", delay: 100 };
-    state["resume_stage"] = { color: "#FF0000", delay:   0 };
-    state["dispatcher"]   = { color: "#2ECCFA", delay:   0 };
-    state["end_stage"]    = { color: "blue",    delay: 100 };
+    state["start_stage"]  = { color: "#084B8A", delay: 500 };
+    state["resume_stage"] = { color: "#FF0000", delay: 250 };
+    state["dispatcher"]   = { color: "#2ECCFA", delay: 250 };
+    state["end_stage"]    = { color: "blue",    delay: 500 };
 
     function isEmpty(obj) {
       return (Object.keys(obj).length == 0);
@@ -52,6 +46,7 @@ var pdw = {
       };
       var sym = (inp ? "i" : "o") + nr.toString();
       var p = $(go.Shape, "Rectangle", { portId: sym });
+      if (nr >= ports.length) nr = -1;
       m.insertArrayItem(ports, nr, p);
       return sym;
     }
@@ -120,6 +115,7 @@ var pdw = {
       if (consout == null) {
         m.addNodeData({ key: "cons", category: "cons", cons: []});
         consout = m.findNodeDataForKey("cons");
+
   //    mkLink({ from: "cons", to: doc.id, category: "balloon" });
       };
 
@@ -128,7 +124,7 @@ var pdw = {
       // fools the trimming process.
 
       var cons = consout.cons;
-      var line = doc.txt.substring(0,72);     // Truncate output lines
+      var line = doc.txt.substring(0,80);     // Truncate output lines
       cons.push('\u00ad' + line);                 // Avoid trimming
       if (cons.length > 12) { cons.splice(0,1); }  // Keep last lines
       consout.cons = cons;
@@ -175,6 +171,7 @@ var pdw = {
     function do_sub_start(doc) {
       var sub = {                 // of most recently dispatched stage
           key: doc.id,
+          group: "",
           isGroup: true,
           alive: true,
           name: doc.name,
@@ -195,15 +192,14 @@ var pdw = {
       // Go through inputs and outputs to define ports for any links
       // to the old stage for which we have no port yet.
 
-      var node = m.findNodeDataForKey(doc.id);
-      var sub = m.findNodeDataForKey(doc.refid);
+      var node = m.findNodeDataForKey(doc.id);      // Caller stage
+      var sub = m.findNodeDataForKey(doc.refid);    // callee
       m.setDataProperty(sub, "parent", doc.id);
 
       for (var i in node.inputs) {    // Define missing input ports
         var pi = sub.inputs[i];
         if (pi === undefined) pi = addPort(sub, true, i);
       }
-
       for (var i in node.outputs) {   // Define missing output ports
         var po = sub.outputs[i];
         if (po === undefined) po = addPort(sub, false, i);
@@ -272,10 +268,38 @@ var pdw = {
       return delay
     }
 
+    function do_message(doc) {
+      var s = doc.id + '-msg';
+      var node = m.findNodeDataForKey(doc.id);
+      if (node == null) {
+        var popup = {
+          key: s,
+          category: "cons",
+          stroke: "yellow",
+          cons: []
+        }
+        m.addNodeData(popup);
+        node = m.findNodeDataForKey(s);
+        var ref = (doc.id != '00000000') ? doc.id : pdw.syntax;
+        if (ref != '00000000') {
+          mkLink({ from: s, to: doc.id, category: "balloon" });
+        }
+      };
+      var cons = node.cons;
+      var line = doc.msg.substring(0,79);     // Truncate output lines
+      cons.push('\u00ad' + line);                 // Avoid trimming
+      if (cons.length > 8) { cons.splice(0,1); }  // Keep last lines
+      txt = cons.join('\n');                  // Make text string
+      m.setDataProperty(node, "text", txt);
+    }
+
     function do_event(doc) {
-        var delay = 100;
+        var delay = 200;
         var m = pdw.myDiagram.model;
         switch (doc.evt) {
+          case "message":
+            do_message(doc);
+            break;
           case "begin_set":
             pdw.group = "";
             break;
@@ -309,8 +333,12 @@ var pdw = {
           case "scan_connect":
             do_connect(doc);
             break;
+          case "syntax":
+            pdw.syntax = doc.id;
+            break;
           case "leave_scanner":
-            group = "";
+//            group = "";
+            pdw.syntax = "";
             delay = 1000;
             break;
           case "start_stage":
@@ -328,6 +356,10 @@ var pdw = {
           case "subroutine_end":
             do_sub_end(doc);
             break;
+          case "stalled":
+            var tmp = { id: '00000000', msg: 'Pipeline Stalled' };
+            do_message(tmp);
+            break;
         };
         return delay
     }
@@ -339,7 +371,6 @@ var pdw = {
 //      var doc = document.getElementById("data");
         if (text.length > 0) delay = do_event(JSON.parse(text));
     } else pdw.asleep = true;
-    console.log(pdw.done, delay);
     setTimeout('pdw.proc();', (pdw.events.length == 0) ? 500 : delay);
   },
 
@@ -426,6 +457,7 @@ var pdw = {
             font: "12px monospace",
             spacingAbove: 2         // Undocumented line spacing
           },
+          new go.Binding("stroke"),
           new go.Binding("text"))
       );
 
@@ -491,12 +523,13 @@ var pdw = {
       var xhr = new XMLHttpRequest;
       xhr.open('GET', url, true);
       xhr.onload = function(e) {
-        cmdarea.innerHTML = self.responseText
+        cmdarea.value = xhr.responseText
       }
+      xhr.send()
     }
 
     var cmdarea = document.getElementById("cmdline");
-    if (arg == "") {
+    if (arg == undefined) {
       var line = cmdarea.value;
       url = "events?" + encodeURIComponent(line);
     } else {
@@ -517,7 +550,6 @@ var pdw = {
     var xhr = new XMLHttpRequest;
     xhr.open('GET', url, true);
     xhr.onprogress = function(e) {
-      console.log('Progress', this.status);
       if (this.status == 200) {
           var data = this.responseText;
           do {
@@ -549,44 +581,3 @@ var pdw = {
   }
 
 }
-
-
-  </script>
-
-<body onload="pdw.init()">
-  <div style="width:100%">
-    <div style="width:350px; height:900px; float: left">
-      <h2>Pipedemo - Web Edition</h2>
-  <textarea rows=40 cols=40 id="cmdline">
-  (end \)
-  | cp query names
-  | split ,
-  | p: pick w -1 == ,DSC,
-  | spec substr 1.8 of w1 2.9
-  | join 5 , ,
-  | strliteral cond /Disconnected:/
-  | i: fanin
-  | console
-  \ p:
-  | strip
-  | insert , ,
-  | buffer
-  | strliteral cond /Logged On:/
-  | i:
-  </textarea>
-      <br>
-      <input type="button" value="Run" onclick="pdw.run()">
-      <p>
-      <div style="width:350px; height:50px; float: bottom">
-        <input type="button" value="Demo 1" onclick="pdw.run('demo1')">
-        <input type="button" value="Demo 2" onclick="pdw.run('demo2')">
-        <input type="button" value="Demo 3" onclick="pdw.run('demo3')">
-        <input type="button" value="Demo 4" onclick="pdw.run('demo4')">
-      </div>
-    </div>
-    <div id="myDiagramDiv"
-       style="width:900px; height:900px; background-color: #F2F2F2; float: right">
-    </div>
-  </div>
-</body>
-</html>

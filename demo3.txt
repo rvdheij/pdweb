@@ -1,0 +1,3 @@
+  command LISTFILE DEMO% TXT
+| hashfile sha1/b64
+| cons
