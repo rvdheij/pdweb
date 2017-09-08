@@ -442,7 +442,7 @@ var pdw = {
               verticalAlignment: go.Spot.Center,
               margin: 10, stroke: "white"
             },
-            new go.Binding("text", "name"),
+            new go.Binding("text", "name")
           ),
           new go.Binding("background", "color")
         ),
@@ -516,6 +516,9 @@ var pdw = {
 
 
   },
+
+// **** run ****
+
 
   run(arg) {
 
