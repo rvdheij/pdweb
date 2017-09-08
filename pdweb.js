@@ -125,7 +125,7 @@ var pdw = {
 
       var cons = consout.cons;
       var line = doc.txt.substring(0,80);     // Truncate output lines
-      cons.push('\u00ad' + line);                 // Avoid trimming
+      cons.push('> ' + line);                 // Avoid trimming
       if (cons.length > 12) { cons.splice(0,1); }  // Keep last lines
       consout.cons = cons;
       txt = cons.join('\n');                  // Make text string
