@@ -1,0 +1,763 @@
+{ "evt": "begin_set", "id" : "03F35BB0" }
+{ "evt": "enter_scanner", "id" : "03F35BB0" }
+{ "evt": "vector_allocated", "id" : "03ED76A0", "func" : 0, "flags" : "00100000", "name" : "" }
+{ "evt": "scan_begin", "id" : "03ED76A0", "pipe" : 1, "stage" : 0 }
+{ "evt": "scan_stage", "id" : "03ED7868", "pipe" : 1, "stage" : 1, "flags" : "00100000", "label" : "", "streamid" : "00000000", "verb" : "storage", "parm" : "02100000 256" }
+{ "evt": "scan_stage", "id" : "03ED79E8", "pipe" : 1, "stage" : 2, "flags" : "00100000", "label" : "", "streamid" : "00000000", "verb" : "fblock", "parm" : "64" }
+{ "evt": "scan_stage", "id" : "03ED7B68", "pipe" : 1, "stage" : 3, "flags" : "00100000", "label" : "", "streamid" : "00000000", "verb" : "", "parm" : "fmtdump" }
+{ "evt": "scan_stage", "id" : "03ED7CE8", "pipe" : 1, "stage" : 4, "flags" : "00100000", "label" : "", "streamid" : "00000000", "verb" : "cons", "parm" : "" }
+{ "evt": "syntax", "id" : "03ED7868" }
+{ "evt": "leave_scanner", "id" : "03ED76A0", "rc" : 0 }
+{ "evt": "commit", "id" : "03ED76A0", "rc" : 0, "level" : -1 }
+{ "evt": "start_stage", "id" : "03ED7B68" }
+{ "evt": "dispatcher", "id" : "03ED7B68", "r0" : "000001CF", "r1" : "03BA6368", "func" : "CM" }
+{ "evt": "enter_scanner", "id" : "03F35BB0" }
+{ "evt": "vector_allocated", "id" : "03A20EE0", "func" : 1, "flags" : "00100010", "name" : "FMTDUMP.REXX:4" }
+{ "evt": "scan_begin", "id" : "03A20EE0", "pipe" : 1, "stage" : 0 }
+{ "evt": "scan_connect", "id" : "03A20EE0", "pipeline" : 1, "stage" : 1, "flag" : 1, "streamid" : "00000000", "streamnum" : 0 }
+{ "evt": "scan_stage", "id" : "03A210A8", "pipe" : 1, "stage" : 2, "flags" : "00100010", "label" : "f", "streamid" : "00000000", "verb" : "fanout", "parm" : "" }
+{ "evt": "scan_stage", "id" : "03A21228", "pipe" : 1, "stage" : 3, "flags" : "00100010", "label" : "", "streamid" : "00000000", "verb" : "spec", "parm" : "number d2x 1.4 ri" }
+{ "evt": "scan_stage", "id" : "03A213A8", "pipe" : 1, "stage" : 4, "flags" : "00100010", "label" : "j", "streamid" : "00000000", "verb" : "juxtapose", "parm" : "" }
+{ "evt": "scan_stage", "id" : "03A21528", "pipe" : 1, "stage" : 5, "flags" : "00100010", "label" : "", "streamid" : "00000000", "verb" : "spec", "parm" : "a: 1.4 - if break(a) then 1.4 1 set #0:=0 fi print #0 d2x 6.4 ri 5-* 12 set #0+=16" }
+{ "evt": "scan_connect", "id" : "03A20EE0", "pipeline" : 1, "stage" : 6, "flag" : 2, "streamid" : "00000000", "streamnum" : 0 }
+{ "evt": "scan_begin", "id" : "03A20EE0", "pipe" : 2, "stage" : 0 }
+{ "evt": "scan_labelref", "id" : "03A20EE0", "pipeline" : 2, "stage" : 1, "refid" : "03A210A8", "label" : "f", "streamid" : "00000000" }
+{ "evt": "scan_stage", "id" : "03A216A8", "pipe" : 2, "stage" : 2, "flags" : "00100010", "label" : "", "streamid" : "00000000", "verb" : "deblock", "parm" : "f 16" }
+{ "evt": "scan_stage", "id" : "03A21828", "pipe" : 2, "stage" : 3, "flags" : "00100010", "label" : "", "streamid" : "00000000", "verb" : "spec", "parm" : "1.4 c2x 1 5.4 c2x nw 9.4 c2x nw 13.4 c2x nw ,*, 40 1.16 n.16 ,*, n" }
+{ "evt": "scan_stage", "id" : "03A219A8", "pipe" : 2, "stage" : 4, "flags" : "00100010", "label" : "", "streamid" : "00000000", "verb" : "xlate", "parm" : "41.16 00-FF . A-I A-I J-R J-R S-Z S-Z 0-9 0-9 $ $ # # ! ! a-i a-i j-r j-r s-z s-z / / + + - - 40 40 % % * * { { } } = = ( ( ) ) < < > > : : * * , , ' ' \u007F \u007F" }
+{ "evt": "scan_labelref", "id" : "03A20EE0", "pipeline" : 2, "stage" : 5, "refid" : "03A213A8", "label" : "j", "streamid" : "00000000" }
+{ "evt": "syntax", "id" : "03A219A8" }
+{ "evt": "leave_scanner", "id" : "03A20EE0", "rc" : 0 }
+{ "evt": "caller_wait", "id" : "03ED7B68", "refid" : "03A20EE0" }
+{ "evt": "commit", "id" : "03A20EE0", "rc" : 0, "level" : -2 }
+{ "evt": "start_stage", "id" : "03A210A8" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFF", "r1" : "00000001", "func" : "SA" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 12, "r0" : "FFFFFFFF", "r1" : "00000001", "func" : "SA" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "00000000", "func" : "CT" }
+{ "evt": "start_stage", "id" : "03A21228" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "03A1CD90", "func" : "CT" }
+{ "evt": "start_stage", "id" : "03A213A8" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "00000002", "func" : "CT" }
+{ "evt": "start_stage", "id" : "03A21528" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1E5F8", "func" : "CT" }
+{ "evt": "start_stage", "id" : "03A21828" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03A1FEF8", "func" : "CT" }
+{ "evt": "start_stage", "id" : "03A219A8" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A208B0", "func" : "CT" }
+{ "evt": "commit", "id" : "03A20EE0", "rc" : 0, "level" : 0 }
+{ "evt": "commit", "id" : "03ED76A0", "rc" : 0, "level" : 0 }
+{ "evt": "start_stage", "id" : "03ED7868" }
+{ "evt": "dispatcher", "id" : "03ED7868", "r0" : "00000100", "r1" : "02100000", "func" : "PO" }
+{ "evt": "start_stage", "id" : "03ED79E8" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "03ED7A78", "r1" : "03C41848", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 0, "r0" : "00000100", "r1" : "02100000", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000000", "r1" : "00000000", "func" : "CT" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "00000000", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000000", "r1" : "03A1CD90", "func" : "CT" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "00000002", "func" : "CT" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SA" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 8, "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SA" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SA" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 12, "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SA" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "00000001", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "00000001", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "00000001", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "start_stage", "id" : "03A216A8" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "03A21738", "r1" : "03A1F238", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03A1FEF8", "func" : "CT" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A208B0", "func" : "CT" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "0000004B", "r1" : "00000000", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7B8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1E5F8", "func" : "CT" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "start_stage", "id" : "03ED7CE8" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000005", "r1" : "03C42774", "func" : "MS" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 66280368, "r0" : "00000005", "r1" : "03C42774", "func" : "MS" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000005", "r1" : "03C42774", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "0001 0000  58F0F008 07FF02D0 02107536 F5F7F4F1    *.00....}....5741*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 12, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03A1E1F0", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03A1E1F0", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0010  60C1F0F7 40A961E5 D440E5C5 D9E2C9D6    *-A07 z/VM VERSIO*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0020  D540F640 4DC35D40 C3D6D7E8 D9C9C7C8    *N 6 (C) COPYRIGH*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0030  E340C9C2 D440C3D6 D9D740F2 F0F0F16B    *T IBM CORP 2001,*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7B8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "0002 0000  40F2F0F1 F640F5F7 F4F160C1 F0F540A9    * 2016 5741-A05 z*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0010  61E5D440 E5C5D9E2 C9D6D540 F5404DC3    */VM VERSION 5 (C*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0020  5D40C3D6 D7E8D9C9 C7C8E340 C9C2D440    *) COPYRIGHT IBM *" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0030  C3D6D9D7 40F2F0F0 F16B40F2 F0F0F840    *CORP 2001, 2008 *" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7B8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "0003 0000  F5F6F5F4 60C1F1F7 40A961E5 D440E5C5    *5654-A17 z/VM VE*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0010  D9E2C9D6 D540F440 4DC35D40 C3D6D7E8    *RSION 4 (C) COPY*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0020  D9C9C7C8 E340C9C2 D440C3D6 D9D740F2    *RIGHT IBM CORP 2*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0030  F0F0F16B 40F2F0F0 F240F5F6 F5F460C1    *001, 2002 5654-A*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000000", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7B8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000004", "r1" : "03A1C988", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "FFFFFFFE", "r1" : "00000001", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7B8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7B8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "0004 0000  F1F740A9 61E5D440 E5C5D9E2 C9D6D540    *17 z/VM VERSION *" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0010  F3404DC3 5D40C3D6 D7E8D9C9 C7C8E340    *3 (C) COPYRIGHT *" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418E8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418E8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0020  C9C2D440 C3D6D9D7 40F2F0F0 F140F5F6    *IBM CORP 2001 56*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C418F8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C418F8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000001", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000001", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "LO" }
+{ "evt": "cons_out", "id" : "03ED7CE8", "txt" : "     0030  F5F460F0 F3F040E5 D461C5E2 C140E5C5    *54-030 VM/ESA VE*" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 0, "r0" : "00000000", "r1" : "03C42E30", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000044", "r1" : "03A1E1F0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "0000003D", "r1" : "03A1D7C8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 0, "r0" : "00000000", "r1" : "03A1D7C8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000039", "r1" : "03A20A90", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 0, "r0" : "00000000", "r1" : "03A20A90", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000039", "r1" : "03A1FAF0", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 0, "r0" : "00000000", "r1" : "03C41908", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000010", "r1" : "03C41908", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 0, "r0" : "00000000", "r1" : "03C41918", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "00000000", "r1" : "03C41918", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 0, "r0" : "00000040", "r1" : "03C418D8", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 0, "r0" : "00000000", "r1" : "03C418D8", "func" : "PI" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "resume_stage", "id" : "03ED7868", "rc" : 0, "r0" : "00000100", "r1" : "02100000", "func" : "PO" }
+{ "evt": "dispatcher", "id" : "03ED7868", "r0" : "03ED78F8", "r1" : "03C41730", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03ED7868", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03ED79E8", "rc" : 12, "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03ED79E8", "r0" : "03ED7A78", "r1" : "03C41848", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03ED79E8", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A210A8", "rc" : 12, "r0" : "00000000", "r1" : "03C418D8", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A210A8", "r0" : "03A21138", "r1" : "03A1C108", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A210A8", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A216A8", "rc" : 12, "r0" : "00000000", "r1" : "03C41918", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A216A8", "r0" : "03A21738", "r1" : "03A1EFB0", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A216A8", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A21828", "rc" : 12, "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21828", "r0" : "03A218B8", "r1" : "03A1F360", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A21828", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A219A8", "rc" : 12, "r0" : "00000000", "r1" : "03A20A90", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A219A8", "r0" : "03A21A38", "r1" : "03A208B0", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A219A8", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A21228", "rc" : 12, "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21228", "r0" : "03A212B8", "r1" : "03A1C1F8", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A21228", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A213A8", "rc" : 12, "r0" : "FFFFFFFC", "r1" : "03A1D7C8", "func" : "SL" }
+{ "evt": "dispatcher", "id" : "03A213A8", "r0" : "03A21438", "r1" : "03A1D748", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A213A8", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03A21528", "rc" : 12, "r0" : "00000000", "r1" : "FFFFFFF4", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03A21528", "r0" : "03A215B8", "r1" : "03A1DA60", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03A21528", "rc" : 0 }
+{ "evt": "subroutine_end", "id" : "03A20EE0", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03ED7B68", "rc" : 0, "r0" : "000001CF", "r1" : "03BA6368", "func" : "CM" }
+{ "evt": "dispatcher", "id" : "03ED7B68", "r0" : "00000000", "r1" : "03C41BB8", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03ED7B68", "rc" : 0 }
+{ "evt": "resume_stage", "id" : "03ED7CE8", "rc" : 12, "r0" : "00000000", "r1" : "03C42E30", "func" : "LO" }
+{ "evt": "dispatcher", "id" : "03ED7CE8", "r0" : "03ED7D78", "r1" : "03C42700", "func" : "ES" }
+{ "evt": "end_stage", "id" : "03ED7CE8", "rc" : 0 }
+{ "evt": "end_set", "id" : "03F35BB0", "rc" : 0 }

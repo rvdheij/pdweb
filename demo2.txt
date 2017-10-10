@@ -1,0 +1,5 @@
+(end \)
+\ storage 02100000 256
+| fblock 64
+| fmtdump
+| cons

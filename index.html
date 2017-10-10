@@ -1,0 +1,42 @@
+<!DOCTYPE html>  <!-- HTML5 document type -->
+<html>
+<head>
+  <!-- use go-debug.js when developing and go.js when deploying -->
+  <script src="https://gojs.net/latest/release/go-debug.js"></script>
+  <script src="https://gojs.net/latest/extensions/BalloonLink.js"></script>
+  <script src="pdweb.js"></script>
+
+</head>
+
+<body onload="pdw.init()">
+  <div style="width:100%">
+    <div style="width:300px; height:900px; float: left">
+      <h2>Pipedemo - Web Edition</h2>
+  <textarea rows=45 cols=52 id="cmdline">
+(end \)
+\ query
+| split string / - /
+| i: fanin
+| cons
+\ command IDENTIFY
+| i:
+  </textarea>
+      <br>
+      <input type="button" value="Run" onclick="pdw.run()">
+      <p>
+      <div style="width:300px; height:50px; float: left">
+        <input type="button" value="Demo 1" onclick="pdw.run('demo1')">
+        <input type="button" value="Demo 2" onclick="pdw.run('demo2')">
+        <input type="button" value="Demo 3" onclick="pdw.run('demo3')">
+        <input type="button" value="Demo 4" onclick="pdw.run('demo4')">
+      </div>
+      <div style="width:300px; height:50px; float: left">
+        <i>Rob van der Heij</i>
+      </div>
+    </div>
+    <div id="myDiagramDiv"
+       style="width:900px; height:900px; background-color: #F2F2F2; float: right">
+    </div>
+  </div>
+</body>
+</html>

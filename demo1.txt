@@ -1,0 +1,19 @@
+(end \)
+  command QUERY DISK
+| d: take
+| i: faninany
+| cons
+\ d:
+| p: pick 8.3 /== ,DIR,
+| spec 1-* 1
+     f: 39-44 -
+     u: 46-55 -
+     b: 60-69 -
+     set #0+=f;#1+=u;#2+=b
+     break eof
+     print #0 pic zzzzz9 39
+     print #1 pic zzzzzzzzz9 46
+     print #1 pic zzzzzzzzz9 60
+| i:
+\ p:
+| i:
